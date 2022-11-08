@@ -26,9 +26,9 @@ cd ./argon2wasm
 ./build.sh
 ```
 
-The build script creates a "dist" directory.
+The build script creates a "dist" directory. (If a "dist" directory already exists, it is replaced.)
 
-This contains the wasm (in the "pkg" directory) as well as js and ts bindings to said wasm (in the "lib" directory).
+This directory contains the wasm code (in the "pkg" directory) as well as js and ts bindings to said wasm code (in the "lib" directory).
 
 ## How to use
 
