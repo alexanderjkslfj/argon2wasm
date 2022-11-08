@@ -64,4 +64,54 @@ init().then(() => {
 
 ## Documentation
 
-TBA
+### init
+**init** is the default export of the module. It must be called and fully awaited before the **Argon2** method is first called. **init** must only be called once.
+
+### Argon2
+The **Argon2** method returns a **ConfiguredArgon2** object which you can use for hashing and verifying.
+
+It takes an options object as an optional parameter, with the following optional fields:
+
+
+**algorithm**     - *string*  - Which algorithm to use. Allows "Argon2i", "Argon2d" and "Argon2id". Default is "Argon2id".
+
+**version**       - *number*  - Which version of argon2 to use. Allows 16 and 19. Default is 19.
+
+**pepper**        - *string*  - Which pepper to use. Default is an empty string, which means no pepper is used.
+
+**memoryCost**    - *number*  - Which memory cost to use. Default is 4096.
+
+**iterationCost** - *number*  - Which iteration cost to use. Default is 3.
+
+**parallelism**   - *number*  - What level of parallelism to use. Default is 1.
+
+**outputLen**     - *number*  - Which output length to use. Default is 32.
+
+
+It returns a **ConfiguredArgon2** object with the given configuration.
+
+### ConfiguredArgon2
+
+A **ConfiguredArgon2** object can be created using **Argon2**. It has two methods, **hash** and **verify**.
+
+#### hash
+
+The hash method hashes a given string.
+
+It has only one parameter, "password".
+
+**password**  - *string*  - The string to create a hash of
+
+It returns the hash as a string.
+
+#### verify
+
+The verify method verifies whether a given string matches a given hash.
+
+It uses two parameters, "password" and "hash".
+
+**password**  - *string*  - The cleartext password to match against the hash
+
+**hash**      - *string*  - The hash to match against.
+
+Returns true if the password matches the hash, else it returns false.
