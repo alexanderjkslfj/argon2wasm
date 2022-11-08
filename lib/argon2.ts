@@ -17,7 +17,9 @@ export interface ConfiguredArgon2 {
 }
 
 /**
+ * Creates an Argon2 object containing the configurations passed as parameters.
  * 
+ * Parameters, if given, are expected to be valid.
  * @param options the configuration options of the argon2 object
  * @returns a configured argon2 object with the methods hash and verify
  * 
@@ -81,6 +83,10 @@ export function Argon2(options?: {
     }
 }
 
+/**
+ * Initializes the module.
+ * @returns a promise that resolves when the initialization finishes
+ */
 export default function init(): Promise<void> {
     if (initializing) throw "init has already been called"
 
