@@ -43,17 +43,25 @@ Since the module imports code from "pkg", the directory structure of "dist" shou
 Example usage is as follows:
 
 ```javascript
+// import the module
 import init, {Argon2} from "./dist/lib/argon2.mjs"
 
+// initialize the module
 init().then(() => {
+
+  // create a ConfiguredArgon2 object
   const argon2 = new Argon2({algorithm: "Argon2id"})
   
+  // create a hash of "myPassword" using the configuration defined in the argon2 object
   const password = "myPassword"
   const hash = argon2.hash(password)
   
+  // check if "myPassword" is successfully verified when matched against the hash of "myPassword"
   const doesCorrectPasswordWork = argon2.verify("myPassword", hash)
+  // check if a different string is successfully verified when matched against the same hash
   const doesIncorrectPasswordWork = argon2.verify("notMyPassword", hash)
   
+  // check if the results of the prior checks are as expected
   if(doesCorrectPasswordWork && !doesIncorrectPasswordWork) {
     console.log("The hashing module works!")
   } else {
