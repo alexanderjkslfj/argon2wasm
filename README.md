@@ -50,7 +50,7 @@ import init, {Argon2} from "./dist/lib/argon2.mjs"
 init().then(() => {
 
   // create a ConfiguredArgon2 object
-  const argon2 = new Argon2({algorithm: "Argon2id"})
+  const argon2 = Argon2({algorithm: "Argon2id"})
   
   // create a hash of "myPassword" using the configuration defined in the argon2 object
   const password = "myPassword"
