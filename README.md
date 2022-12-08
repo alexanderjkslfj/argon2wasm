@@ -108,11 +108,11 @@ It returns the hash as a ```string```.
 
 #### verify
 
-The **verify** method verifies whether the passed string matches the passed hash.
+The **verify** method verifies whether the passed cleartext matches the hash.
 
 | Parameter     | Type          | Description                                       |
 | :---          | :---          | :---                                              |
-| **password**  | ```string```  | the cleartext password to match against the hash  |
+| **password**  | ```string```  | the cleartext to match against the hash           |
 | **hash**      | ```string```  | the hash to match the string against              |
 
-Returns true if the password matches the hash, else it returns false.
+Returns true if the cleartext matches the hash, else it returns false.
