@@ -108,7 +108,7 @@ It returns the hash as a ```string```.
 
 #### verify
 
-The **verify** method verifies whether the passed cleartext matches the hash.
+The **verify** method checks whether the passed cleartext matches the hash.
 
 | Parameter     | Type          | Description                                       |
 | :---          | :---          | :---                                              |
