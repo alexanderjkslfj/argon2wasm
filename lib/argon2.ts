@@ -1,10 +1,10 @@
 import initialize, { hash, verify } from "../pkg/argon2wasm.js"
 
-// true if init has been called
-let initializing = false
-
 // true if init has finished
 let initialized = false
+
+// promises waiting for init to finish
+let initcalls: null | (() => unknown)[] = null
 
 const argon2 = {
     hash,
@@ -85,17 +85,32 @@ export function Argon2(options?: {
 
 /**
  * Initializes the module.
- * @returns a promise that resolves when the initialization finishes
+ * @returns a promise that resolves when the initialization finishes (or has finished)
  */
 export default function init(): Promise<void> {
-    if (initializing) throw "init has already been called"
-
-    initializing = true
-
     return new Promise(res => {
-        initialize().then(() => {
-            initialized = true
+        if (initialized) {
             res()
-        })
+        } else {
+            if (initcalls === null) {
+                initcalls = [res]
+
+                initialize().then(() => {
+                    initialized = true
+
+                    if (initcalls !== null) {
+
+                        for (const initcall of initcalls) {
+                            initcall()
+                        }
+
+                        initcalls.length = 0
+
+                    }
+                })
+            } else {
+                initcalls.push(res)
+            }
+        }
     })
 }
