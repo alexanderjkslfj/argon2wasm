@@ -53,6 +53,12 @@ export function Argon2(options?: {
     const parallelism = options?.parallelism || 1
     const outputLen = options?.outputLen || 32
 
+    if (!["Argon2i", "Argon2d", "Argon2id"].includes(algorithm))
+        throw `Invalid algorithm: ${algorithm}`
+
+    if (version !== 16 && version !== 19)
+        throw `Invalid version: ${version}`
+
     return {
         hash(password: string): string {
             return argon2.hash(
